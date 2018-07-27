@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "esNext",
+    "lib": ["DOM", "ES6", "DOM.Iterable", "ScriptHost", "ES2015", "ESNext"],
+    "noImplicitAny": true,
+    "sourceMap": true
+  }
+}

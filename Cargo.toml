@@ -1,0 +1,18 @@
+cargo-features = ["edition"]
+
+[package]
+name = "cbor-nemo157-com"
+version = "0.1.0"
+authors = ["Wim Looman <wim@nemo157.com>"]
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+cbor-diag = { git = "https://github.com/Nemo157/cbor-diag-rs" }
+serde = "1.0.70"
+
+[dependencies.wasm-bindgen]
+version = "0.2.15"
+features = ["serde-serialize"]
