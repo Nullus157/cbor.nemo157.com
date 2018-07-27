@@ -17,4 +17,4 @@ cbor.then(cbor => {
         diag.textContent = result.Ok[1]
       }
     })
-})
+}, err => hex.textContent = err)
