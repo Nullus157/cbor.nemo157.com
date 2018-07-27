@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <title>CBOR Playground</title>
+    <style>
+      html {
+        height: 100%
+      }
+      body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        display: flex;
+        align-items: stretch;
+      }
+      #left, #right {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 5px;
+      }
+      #input, #hex, #diag {
+        flex: 1;
+      }
+      #hex, #diag {
+        border: 1px solid red;
+        border-radius: 5px;
+        margin: 0;
+        margin-bottom: 5px;
+      }
+      #hex:before, #diag:before {
+        background: white;
+        margin-left: 20px;
+        margin-top: -30px;
+        color: pink;
+      }
+      #hex:before {
+        content: "Annotated Hex\A";
+      }
+      #diag:before {
+        content: "Diagnostic Notation\A";
+      }
+    </style>
+  </head>
+  <body>
+    <div id='left'>
+      <label><input type='radio' name='type' value='auto' checked /> Auto</label>
+      <label><input type='radio' name='type' value='hex' checked /> Hex</label>
+      <label><input type='radio' name='type' value='diag' checked /> Diagnostic Notation</label>
+      <button id='submit'>Parse</button>
+      <textarea id='input'></textarea>
+    </div>
+    <div id='right'>
+      <pre id='hex'></pre>
+      <pre id='diag'></pre>
+    </div>
+  </body>
+</html>

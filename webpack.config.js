@@ -3,15 +3,13 @@ const path = require('path');
 
 module.exports = {
   devtool: 'inline-source-map',
-  entry: "./src/index.ts",
+  entry: './src/main.ts',
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "index.js",
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'main.js',
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      title: 'CBOR Playground',
-    }),
+    new HtmlWebpackPlugin({ template: 'src/index.html' }),
   ],
   module: {
     rules: [
