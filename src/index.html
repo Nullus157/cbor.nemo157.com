@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv='Content-type' content='text/html; charset=utf-8'/>
     <title>CBOR Playground</title>
     <style>
       html {
@@ -12,7 +12,21 @@
         width: 100%;
         margin: 0;
         display: flex;
+        flex-direction: column;
         align-items: stretch;
+      }
+      #header, #main, #footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+      }
+      #main, #footer {
+        align-items: stretch;
+      }
+      #header {
+        align-items: center;
+        padding-top: 5px;
+        padding-bottom: 10px;
       }
       #left, #right {
         display: flex;
@@ -21,13 +35,18 @@
         align-items: stretch;
         padding: 5px;
       }
+      #parse {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+      }
       #input {
         font-family: monospace;
       }
       #saved {
         resize: none;
       }
-      #input, #hex, #diag {
+      #main, #input, #hex, #diag, #submit {
         flex: 1;
       }
       #hex, #diag {
@@ -44,26 +63,93 @@
         color: pink;
       }
       #hex:before {
-        content: "Annotated Hex\A\A";
+        content: 'Annotated Hex\A\A';
       }
       #diag:before {
-        content: "Diagnostic Notation\A\A";
+        content: 'Diagnostic Notation\A\A';
+      }
+      input[type='radio'] {
+        display: none;
+      }
+      input[type='radio'] + label {
+        border: 1px solid gray;
+        padding: 3px;
+        cursor: pointer;
+      }
+      input[type='radio'] + label:hover {
+        background-color: #4c8dc050;
+      }
+      input[type='radio'] + label:first-of-type {
+        border-radius: 5px 0 0 5px;
+      }
+      input[type='radio'] + label:last-of-type {
+        border-radius: 0 5px 5px 0;
+      }
+      input[type='radio']:checked + label {
+        color: #fff;
+        background-color: #2c6da0;
+      }
+      button {
+        padding: 5px 10px;
+        margin: 0;
+        display: inline;
+        background-color: #2c6da0;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 5px;
+      }
+      button:hover {
+        background: #3c7db0;
+      }
+      button:active {
+        position: relative;
+        top: 1px;
+        left: 1px;
+        padding: 6px 10px 4px;
+      }
+      #submit {
+        margin-left: 5px;
       }
     </style>
   </head>
   <body>
-    <div id='left'>
-      <label><input type='radio' name='type' value='auto' checked /> Auto</label>
-      <label><input type='radio' name='type' value='hex' checked /> Hex</label>
-      <label><input type='radio' name='type' value='diag' checked /> Diagnostic Notation</label>
-      <button id='submit'>Parse</button>
-      <textarea id='input'></textarea>
-      <button id='save'>Generate URL for this text</button>
-      <textarea rows="1" readonly id='saved'></textarea>
+    <div id='header'>
+      <span>Inspired by <a href="http://cbor.me">cbor.me</a></span>
+      <span>
+        See <a href="http://cbor.io">cbor.io</a> for more information on what
+        CBOR is
+      </span>
+      <span>
+        Built on
+        <a href="https://github.com/Nemo157/cbor-diag-rs" style="font-family: monospace">cbor-diag-rs</a>
+      </span>
+      <span>
+        Hosted on <a href="https://github.com/Nemo157/cbor.nemo157.com">GitHub</a>
+      </span>
     </div>
-    <div id='right'>
-      <pre id='hex'></pre>
-      <pre id='diag'></pre>
+    <div id='main'>
+      <div id='left'>
+        <div id='parse'>
+          <input id='type_auto' type='radio' name='type' value='auto' checked />
+          <label for='type_auto'>Auto</label>
+          <input id='type_hex' type='radio' name='type' value='hex' checked />
+          <label for='type_hex'>Hex</label>
+          <input id='type_diag' type='radio' name='type' value='diag' checked />
+          <label for='type_diag'>Diagnostic Notation</label>
+          <button id='submit'>Parse</button>
+        </div>
+        <textarea id='input'></textarea>
+        <button id='save'>Generate URL for this text</button>
+        <textarea rows='1' readonly id='saved'></textarea>
+      </div>
+      <div id='right'>
+        <pre id='hex'></pre>
+        <pre id='diag'></pre>
+      </div>
+    </div>
+    <div id='footer'>
     </div>
   </body>
 </html>
