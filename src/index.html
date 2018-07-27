@@ -21,6 +21,12 @@
         align-items: stretch;
         padding: 5px;
       }
+      #input {
+        font-family: monospace;
+      }
+      #saved {
+        resize: none;
+      }
       #input, #hex, #diag {
         flex: 1;
       }
@@ -29,18 +35,19 @@
         border-radius: 5px;
         margin: 0;
         margin-bottom: 5px;
+        padding: 5px;
       }
       #hex:before, #diag:before {
         background: white;
-        margin-left: 20px;
         margin-top: -30px;
+        text-decoration: underline;
         color: pink;
       }
       #hex:before {
-        content: "Annotated Hex\A";
+        content: "Annotated Hex\A\A";
       }
       #diag:before {
-        content: "Diagnostic Notation\A";
+        content: "Diagnostic Notation\A\A";
       }
     </style>
   </head>
@@ -51,6 +58,8 @@
       <label><input type='radio' name='type' value='diag' checked /> Diagnostic Notation</label>
       <button id='submit'>Parse</button>
       <textarea id='input'></textarea>
+      <button id='save'>Generate URL for this text</button>
+      <textarea rows="1" readonly id='saved'></textarea>
     </div>
     <div id='right'>
       <pre id='hex'></pre>
