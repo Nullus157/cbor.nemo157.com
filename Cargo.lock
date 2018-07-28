@@ -1,7 +1,7 @@
 [[package]]
 name = "cbor-diag"
 version = "0.1.0"
-source = "git+https://github.com/Nemo157/cbor-diag-rs#309342a1a3c6e8cb9ebd387ddb0a9afe9a41c726"
+source = "git+https://github.com/Nemo157/cbor-diag-rs#2249643c605a2b78044cb9b6dc70c85734df4ac0"
 dependencies = [
  "hex 0.3.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "nom 4.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
