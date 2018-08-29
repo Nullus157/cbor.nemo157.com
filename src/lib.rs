@@ -1,5 +1,3 @@
-#![feature(use_extern_macros)]
-
 use wasm_bindgen::{prelude::wasm_bindgen, JsValue};
 
 #[wasm_bindgen]
