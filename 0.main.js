@@ -161,7 +161,7 @@ function __wbindgen_throw(ptr, len) {
 /*!****************************************!*\
   !*** ./build/cbor_nemo157_com_bg.wasm ***!
   \****************************************/
-/*! exports provided: memory, __heap_base, __data_end, __rustc_debug_gdb_scripts_section__, parse_auto, parse_hex, parse_diag, __wbindgen_malloc, __wbindgen_free */
+/*! exports provided: memory, __indirect_function_table, __heap_base, __data_end, parse_auto, parse_hex, parse_diag, __wbindgen_malloc, __wbindgen_free */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
