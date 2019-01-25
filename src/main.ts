@@ -8,17 +8,25 @@ const save = document.getElementById('save')
 const dark = document.getElementById('dark')
 const saved = <HTMLTextAreaElement>document.getElementById('saved')
 
-dark.addEventListener('click', () => {
+function store(setting: string, value: any) {
   try {
-    window.localStorage.setItem('dark', document.body.classList.toggle('dark').toString())
+    window.localStorage.setItem(setting, JSON.stringify(value))
   } catch {
   }
+}
+
+function load(setting: string) {
+  try {
+    return JSON.parse(window.localStorage.getItem(setting))
+  } catch {
+  }
+}
+
+dark.addEventListener('click', () => {
+  store('dark', document.body.classList.toggle('dark'))
 })
 
-try {
-  document.body.classList.toggle('dark', window.localStorage.getItem('dark') === 'true')
-} catch {
-}
+document.body.classList.toggle('dark', load('dark') || false)
 
 cbor.then(cbor => {
   function parse(type: string, value: string) {
@@ -49,6 +57,8 @@ cbor.then(cbor => {
 
   submit.addEventListener('click', () => {
     const type = (<HTMLInputElement>document.querySelector('input[name="type"]:checked')).value;
+    store('type', type)
+    store('value', input.value)
     parse(type, input.value)
   })
   save.addEventListener('click', () => {
@@ -62,6 +72,11 @@ cbor.then(cbor => {
   let url = new URL(document.location.toString());
   let type = url.searchParams.get("type");
   let value = url.searchParams.get("value");
+
+  if (!type || !value) {
+    type = load('type')
+    value = load('value')
+  }
 
   if (type && value) {
     (<HTMLInputElement>document.querySelector(`input[name="type"][value="${type}"]`)).checked = true;
