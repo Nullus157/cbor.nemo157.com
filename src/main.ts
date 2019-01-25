@@ -5,7 +5,20 @@ const submit = document.getElementById('submit')
 const hex = document.getElementById('hex')
 const diag = document.getElementById('diag')
 const save = document.getElementById('save')
+const dark = document.getElementById('dark')
 const saved = <HTMLTextAreaElement>document.getElementById('saved')
+
+dark.addEventListener('click', () => {
+  try {
+    window.localStorage.setItem('dark', document.body.classList.toggle('dark').toString())
+  } catch {
+  }
+})
+
+try {
+  document.body.classList.toggle('dark', window.localStorage.getItem('dark') === 'true')
+} catch {
+}
 
 cbor.then(cbor => {
   function parse(type: string, value: string) {

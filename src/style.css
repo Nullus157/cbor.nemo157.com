@@ -131,3 +131,38 @@ button:active {
 #submit {
   margin-left: 5px;
 }
+
+.dark, .dark textarea {
+  color: white;
+  background-color: black;
+  border-color: gray;
+}
+
+.dark #hex, .dark #diag {
+  border-color: red;
+}
+
+.dark #hex:before, .dark #diag:before {
+  background: black;
+  color: green;
+}
+
+.dark input[type='radio'] + label {
+  border-color: lightgray;
+}
+
+.dark input[type='radio'] + label:hover {
+  background-color: #4c8dc050;
+}
+
+.dark input[type='radio']:checked + label {
+  background-color: #2c6da0;
+}
+
+.dark button {
+  background-color: #2c6da0;
+}
+
+.dark button:hover {
+  background: #3c7db0;
+}
