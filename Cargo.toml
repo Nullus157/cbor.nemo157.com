@@ -12,5 +12,5 @@ cbor-diag = { git = "https://github.com/Nemo157/cbor-diag-rs" }
 serde = "1.0.99"
 
 [dependencies.wasm-bindgen]
-version = "0.2.15"
+version = "0.2.50"
 features = ["serde-serialize"]
