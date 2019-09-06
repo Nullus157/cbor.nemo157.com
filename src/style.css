@@ -46,10 +46,6 @@ body {
   font-family: monospace;
 }
 
-#saved {
-  resize: none;
-}
-
 #main, #input, #hex, #diag, #submit {
   flex: 1;
   min-height: 0;
@@ -129,8 +125,40 @@ button:active {
   padding: 6px 10px 4px;
 }
 
+#saved-container {
+  padding: 5px 10px;
+  margin: 0;
+  display: inline;
+}
+
 #submit {
   margin-left: 5px;
+}
+
+#copy-button {
+  padding: 0;
+  margin: 0;
+  display: inline;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: none;
+}
+
+#copy-button:hover {
+  filter: invert(20%);
+}
+
+#copy-button:active {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  padding: 0;
+  filter: invert(40%);
+}
+
+.dark a {
+  filter: invert(100%);
 }
 
 .dark, .dark textarea {

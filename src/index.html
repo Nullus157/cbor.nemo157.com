@@ -33,7 +33,11 @@
         </div>
         <textarea id='input'></textarea>
         <button id='save'>Generate URL for this text</button>
-        <textarea rows='1' readonly id='saved'></textarea>
+        <div id='saved-container'>
+          <a href="about:blank" id='saved'></a>&nbsp;
+          <button id='copy-button'>📋</button>
+          <span id='copied' style='display: none; opacity: 0'>Copied!</span>
+        </div>
       </div>
       <div id='right'>
         <pre id='hex'></pre>
