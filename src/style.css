@@ -52,6 +52,7 @@ body {
 
 #main, #input, #hex, #diag, #submit {
   flex: 1;
+  min-height: 0;
 }
 
 #hex, #diag {
