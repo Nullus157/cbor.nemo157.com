@@ -1,4 +1,5 @@
 const cbor = import("../build/cbor_nemo157_com")
+import copy from 'copy-to-clipboard'
 
 const input = <HTMLTextAreaElement>document.getElementById('input')
 const submit = document.getElementById('submit')
@@ -6,7 +7,9 @@ const hex = document.getElementById('hex')
 const diag = document.getElementById('diag')
 const save = document.getElementById('save')
 const dark = document.getElementById('dark')
-const saved = <HTMLTextAreaElement>document.getElementById('saved')
+const saved = <HTMLAnchorElement>document.getElementById('saved')
+const copyButton = <HTMLButtonElement>document.getElementById('copy-button')
+const copied = document.getElementById('copied')
 
 function store(setting: string, value: any) {
   try {
@@ -55,18 +58,46 @@ cbor.then(cbor => {
     }
   }
 
-  submit.addEventListener('click', () => {
+  const process = () => {
     const type = (<HTMLInputElement>document.querySelector('input[name="type"]:checked')).value;
     store('type', type)
     store('value', input.value)
     parse(type, input.value)
-  })
+  }
+
+  submit.addEventListener('click', process)
+
   save.addEventListener('click', () => {
-    const type = (<HTMLInputElement>document.querySelector('input[name="type"]:checked')).value;
-    let url = new URL(document.location.toString());
-    url.searchParams.set("type", type);
-    url.searchParams.set("value", input.value);
-    saved.value = url.toString();
+    const type = (<HTMLInputElement>document.querySelector('input[name="type"]:checked')).value
+    let url = new URL(document.location.toString())
+    url.searchParams.set("type", type)
+    url.searchParams.set("value", input.value)
+    saved.href = url.toString()
+    saved.text = 'Permalink to the playground'
+    copyButton.style.display = 'inline-block'
+  })
+
+  let copyTimeout = setTimeout(() => {}, 0)
+  copyButton.addEventListener('click', () => {
+    if (copy(saved.href, { format: 'text/plain' })) {
+      copied.style.display = 'inline-block'
+      copied.style.transition = 'opacity 0.1s'
+      copied.style.opacity = '1'
+      clearTimeout(copyTimeout)
+      copyTimeout = setTimeout(() => {
+        copied.style.transition = 'opacity 5s'
+        copied.style.opacity = '0'
+        copyTimeout = setTimeout(() => {
+          copied.style.display = 'none'
+        }, 5000)
+      }, 100)
+    }
+  })
+
+  input.addEventListener('keydown', e => {
+    if (e.keyCode == 13 && (e.metaKey || e.ctrlKey)) {
+      process()
+    }
   })
 
   let url = new URL(document.location.toString());
