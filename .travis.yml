@@ -1,14 +1,30 @@
 language: rust
 
+cache:
+- cargo
+- npm
+
 rust:
-- stable
+- nightly-2019-09-05
+
+before_script:
+- >
+  [[ "$(cargo-sweep --version)" == "cargo-sweep 0.4.1" ]]
+  || cargo install cargo-sweep --version 0.4.1
+- cargo sweep --stamp
+
+before_cache:
+- rm -rf "$TRAVIS_HOME/.cargo/registry/src"
+- cargo sweep --file
 
 install:
-- cargo install wasm-bindgen-cli --version 0.2.50
+- >
+  [[ "$(wasm-bindgen --version)" == "wasm-bindgen 0.2.50" ]]
+  || cargo install wasm-bindgen-cli --version 0.2.50
 - rustup target add wasm32-unknown-unknown
 
 script:
-- cargo build --target wasm32-unknown-unknown --release
+- cargo build -Zmtime-on-use --target wasm32-unknown-unknown --release
 - mkdir build
 - wasm-bindgen
     target/wasm32-unknown-unknown/release/cbor_nemo157_com.wasm
@@ -21,16 +37,19 @@ matrix:
   - os: linux
 
   - name: cargo fmt
+    cache: false
+    before_script: []
     install:
     - rustup component add rustfmt
     script:
     - cargo fmt --all -- --check
 
   - name: cargo clippy
+    env: [CACHE_NAME=clippy]
     install:
     - rustup component add clippy
     script:
-    - cargo clippy --all --all-targets -- -D warnings
+    - cargo clippy -Zmtime-on-use --all --all-targets -- -D warnings
 
 branches:
   only: [staging, trying, master]
