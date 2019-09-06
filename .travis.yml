@@ -3,10 +3,6 @@ language: rust
 rust:
 - stable
 
-os:
-- linux
-- osx
-
 install:
 - cargo install wasm-bindgen-cli --version 0.2.50
 - rustup target add wasm32-unknown-unknown
@@ -22,6 +18,8 @@ script:
 
 matrix:
   include:
+  - os: linux
+
   - name: cargo fmt
     install:
     - rustup component add rustfmt
