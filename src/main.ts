@@ -55,18 +55,27 @@ cbor.then(cbor => {
     }
   }
 
-  submit.addEventListener('click', () => {
+  const process = () => {
     const type = (<HTMLInputElement>document.querySelector('input[name="type"]:checked')).value;
     store('type', type)
     store('value', input.value)
     parse(type, input.value)
-  })
+  }
+
+  submit.addEventListener('click', process)
+
   save.addEventListener('click', () => {
     const type = (<HTMLInputElement>document.querySelector('input[name="type"]:checked')).value;
     let url = new URL(document.location.toString());
     url.searchParams.set("type", type);
     url.searchParams.set("value", input.value);
     saved.value = url.toString();
+  })
+
+  input.addEventListener('keydown', e => {
+    if (e.keyCode == 13 && (e.metaKey || e.ctrlKey)) {
+      process()
+    }
   })
 
   let url = new URL(document.location.toString());
