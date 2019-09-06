@@ -1,0 +1,36 @@
+language: rust
+
+rust:
+- stable
+
+os:
+- linux
+- osx
+
+install:
+- cargo install wasm-bindgen-cli --version 0.2.33
+- rustup target add wasm32-unknown-unknown
+
+script:
+- cargo build --target wasm32-unknown-unknown --release
+- mkdir build
+- wasm-bindgen target/wasm32-unknown-unknown/release/cbor_nemo157_com.wasm --out-dir build
+- npm install
+- npm run build
+
+matrix:
+  include:
+  - name: cargo fmt
+    install:
+    - rustup component add rustfmt
+    script:
+    - cargo fmt --all -- --check
+
+  - name: cargo clippy
+    install:
+    - rustup component add clippy
+    script:
+    - cargo clippy --all --all-targets -- -D warnings
+
+branches:
+  only: [staging, trying, master]
