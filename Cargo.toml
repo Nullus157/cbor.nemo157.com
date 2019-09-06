@@ -9,7 +9,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 cbor-diag = { git = "https://github.com/Nemo157/cbor-diag-rs" }
-serde = "1.0.70"
+serde = "1.0.99"
 
 [dependencies.wasm-bindgen]
 version = "0.2.15"
