@@ -4,6 +4,11 @@ cache:
 - cargo
 - npm
 
+stages:
+- name: test
+- name: deploy
+  if: branch = master AND type = push AND fork = false
+
 rust:
 - nightly-2019-09-05
 
@@ -50,6 +55,16 @@ matrix:
     - rustup component add clippy
     script:
     - cargo clippy -Zmtime-on-use --all --all-targets -- -D warnings
+
+  - stage: deploy
+    before_deploy:
+    - echo 'cbor.nemo157.com' > dist/CNAME
+    deploy:
+      provider: pages
+      skip_cleanup: true
+      github_token: $GITHUB_TOKEN
+      keep_history: true
+      local_dir: dist
 
 branches:
   only: [staging, trying, master]
