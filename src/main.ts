@@ -50,19 +50,34 @@ cbor.then(cbor => {
     }
 
     if (result.Err) {
-      hex.textContent = result.Err
-      diag.textContent = ''
-    } else {
-      hex.textContent = result.Ok[0]
-      diag.textContent = result.Ok[1]
+      throw result.Err
     }
+
+    hex.textContent = result.Ok[0]
+    diag.textContent = result.Ok[1]
   }
 
   const process = () => {
     const type = (<HTMLInputElement>document.querySelector('input[name="type"]:checked')).value;
     store('type', type)
     store('value', input.value)
-    parse(type, input.value)
+    try {
+      parse(type, input.value)
+    } catch (err) {
+      hex.textContent = err
+      diag.textContent = ''
+    }
+  }
+
+  const tryProcess = () => {
+    const type = (<HTMLInputElement>document.querySelector('input[name="type"]:checked')).value;
+    try {
+      parse(type, input.value)
+      store('type', type)
+      store('value', input.value)
+    } catch (err) {
+      console.debug(`Failure while trying: ${err}`)
+    }
   }
 
   submit.addEventListener('click', process)
@@ -98,6 +113,10 @@ cbor.then(cbor => {
     if (e.keyCode == 13 && (e.metaKey || e.ctrlKey)) {
       process()
     }
+  })
+
+  input.addEventListener('keyup', () => {
+    tryProcess()
   })
 
   let url = new URL(document.location.toString());
