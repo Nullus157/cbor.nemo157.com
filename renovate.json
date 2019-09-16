@@ -5,5 +5,8 @@
   "automerge": true,
   "automergeType": "pr-comment",
   "automergeComment": "bors r+",
-  "requiredStatusChecks": null
+  "requiredStatusChecks": null,
+  "major": {
+    "automerge": false
+  }
 }
