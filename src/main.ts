@@ -128,6 +128,11 @@ cbor.then(cbor => {
     value = load('value')
   }
 
+  if (!value) {
+    type = 'hex'
+    value = 'bf6346756ef563416d7421ff'
+  }
+
   if (type && value) {
     (<HTMLInputElement>document.querySelector(`input[name="type"][value="${type}"]`)).checked = true;
     input.value = value;
