@@ -12,5 +12,5 @@ cbor-diag = "0.1.4"
 serde = "1.0.101"
 
 [dependencies.wasm-bindgen]
-version = "0.2.50"
+version = "0.2.51"
 features = ["serde-serialize"]
