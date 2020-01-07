@@ -10,12 +10,10 @@ stages:
   if: branch = master AND type = push AND fork = false
 
 rust:
-- nightly-2019-09-05
+- nightly-2020-01-06
 
 before_script:
-- >
-  [[ "$(cargo-sweep --version)" == "cargo-sweep 0.4.1" ]]
-  || cargo install --force cargo-sweep --version 0.4.1
+- cargo install cargo-sweep --version 0.4.1
 - cargo sweep --stamp
 
 before_cache:
@@ -23,9 +21,7 @@ before_cache:
 - cargo sweep --file
 
 install:
-- >
-  [[ "$(wasm-bindgen --version)" == "wasm-bindgen 0.2.54" ]]
-  || cargo install --force wasm-bindgen-cli --version 0.2.54
+- cargo install wasm-bindgen-cli --version 0.2.57
 - rustup target add wasm32-unknown-unknown
 
 script:
