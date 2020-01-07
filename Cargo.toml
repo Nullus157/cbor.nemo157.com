@@ -8,7 +8,7 @@ edition = "2018"
 crate-type = ["cdylib"]
 
 [dependencies]
-cbor-diag = "0.1.5"
+cbor-diag = "0.1.6"
 serde = "1.0.104"
 
 [dependencies.wasm-bindgen]
