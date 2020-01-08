@@ -21,7 +21,7 @@ before_cache:
 - cargo sweep --file
 
 install:
-- cargo install wasm-bindgen-cli --version 0.2.57
+- cargo install wasm-bindgen-cli --version 0.2.58
 - rustup target add wasm32-unknown-unknown
 
 script:
