@@ -16,6 +16,6 @@
     "webpack-dev-server": "3.10.3"
   },
   "dependencies": {
-    "copy-to-clipboard": "3.2.1"
+    "copy-to-clipboard": "3.3.1"
   }
 }
