@@ -35,7 +35,7 @@ script:
 - wasm-bindgen
     target/wasm32-unknown-unknown/release/cbor_nemo157_com.wasm
     --out-dir build
-- npm install
+- npm ci
 - npm run build
 
 matrix:

@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
+const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const path = require('path');
 
@@ -17,7 +17,7 @@ module.exports = {
       template: 'src/index.html',
       inlineSource: '.(js|css)$',
     }),
-    new HtmlWebpackIncludeAssetsPlugin({ assets: ['style.css'], append: true }),
+    new HtmlWebpackTagsPlugin({ tags: ['style.css'], append: true }),
     new HtmlWebpackInlineSourcePlugin(),
   ],
   module: {
