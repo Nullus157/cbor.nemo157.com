@@ -1,0 +1,6 @@
+status = [
+  "build",
+  "cargo fmt --check",
+  "cargo clippy",
+]
+delete_merged_branches = true

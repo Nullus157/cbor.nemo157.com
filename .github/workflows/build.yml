@@ -1,0 +1,62 @@
+name: build
+
+env:
+  RUST_BACKTRACE: 1
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: hecrj/setup-rust-action@v1
+      with:
+        rust-version: nightly-2020-01-06
+        targets: wasm32-unknown-unknown
+    - run:
+        echo "::set-env name=WASM_BINDGEN_VERSION::$(
+          cargo metadata --format-version 1
+            | jq -r '.packages[] | select(.name == "wasm-bindgen") | .version'
+        )"
+    - uses: actions-rs/cargo@v1
+      with:
+        toolchain: nightly-2020-01-06
+        command: install
+        args: wasm-bindgen-cli --version ${{ env.WASM_BINDGEN_VERSION }}
+    - uses: actions-rs/cargo@v1
+      with:
+        toolchain: nightly-2020-01-06
+        command: build
+        args: --target wasm32-unknown-unknown --release
+    - run: mkdir build
+    - run:
+        wasm-bindgen
+          target/wasm32-unknown-unknown/release/cbor_nemo157_com.wasm
+          --out-dir build
+    - run: npm ci
+    - run: npm run build
+    - uses: actions/upload-artifact@v1
+      with:
+        name: dist
+        path: dist
+
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'master' }}
+    needs: build
+    steps:
+    - uses: actions/download-artifact@v1
+      with:
+        name: dist
+    - uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: dist
+        cname: cbor.nemo157.com
+
+on:
+  push:
+    branches: [master, staging, trying]
+  pull_request:
+    branches: [master]
