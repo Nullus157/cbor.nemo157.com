@@ -13,16 +13,11 @@ jobs:
       with:
         rust-version: nightly-2020-01-06
         targets: wasm32-unknown-unknown
-    - run:
-        echo "::set-env name=WASM_BINDGEN_VERSION::$(
-          cargo metadata --format-version 1
-            | jq -r '.packages[] | select(.name == "wasm-bindgen") | .version'
-        )"
-    - uses: actions-rs/cargo@v1
-      with:
-        toolchain: nightly-2020-01-06
-        command: install
-        args: wasm-bindgen-cli --version ${{ env.WASM_BINDGEN_VERSION }}
+    - run: |
+        WASM_BINDGEN_VERSION=$(cargo metadata --format-version 1 | jq -r '.packages[] | select(.name == "wasm-bindgen") | .version')
+        cd $(mktemp -d)
+        curl -L https://github.com/rustwasm/wasm-bindgen/releases/download/$WASM_BINDGEN_VERSION/wasm-bindgen-$WASM_BINDGEN_VERSION-x86_64-unknown-linux-musl.tar.gz | tar xz
+        sudo mv wasm-bindgen-$WASM_BINDGEN_VERSION-x86_64-unknown-linux-musl/wasm-bindgen /usr/local/bin/
     - uses: actions-rs/cargo@v1
       with:
         toolchain: nightly-2020-01-06
@@ -39,6 +34,25 @@ jobs:
       with:
         name: dist
         path: dist
+
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    - uses: hecrj/setup-rust-action@v1
+    - uses: actions/download-artifact@v1
+      with:
+        name: dist
+    - run: sudo apt-get update && sudo apt-get install chromium-browser
+    - run: |
+        curl -LO https://github.com/svenstaro/miniserve/releases/download/v0.6.0/miniserve-linux-x86_64
+        chmod a+x miniserve-linux-x86_64
+        sudo mv miniserve-linux-x86_64 /usr/local/bin/miniserve
+    - uses: actions-rs/cargo@v1
+      with:
+        command: test
 
   deploy:
     name: deploy
