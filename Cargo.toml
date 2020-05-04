@@ -13,7 +13,7 @@ serde = "1.0.106"
 futures = "0.3.4"
 
 [dependencies.wasm-bindgen]
-version = "0.2.61"
+version = "0.2.62"
 features = ["serde-serialize"]
 
 [dev-dependencies]
