@@ -9,7 +9,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 cbor-diag = "0.1.6"
-serde = "1.0.106"
+serde = "1.0.110"
 futures = "0.3.4"
 
 [dependencies.wasm-bindgen]
