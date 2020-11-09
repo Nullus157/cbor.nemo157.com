@@ -3,12 +3,79 @@ html {
 }
 
 body {
+  --color-background: rgb(225, 225, 219);
+  --color-foreground: rgb(38, 38, 37);
+  --color-inactive-option-hover: rgb(194, 194, 188);
+  --color-button-foreground: rgb(200, 201, 219);
+  --color-button-background: rgb(59, 46, 42);
+  --color-button-border: rgb(59, 46, 42);
+  --color-button-hover: rgb(230, 159, 103);
+  --color-link: rgb(43, 121, 162);
+  --color-input-background: rgb(241, 241, 241);
+  --color-output-background: rgb(194, 194, 188);
+  --color-output-border: var(--color-button-border);
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+      --color-background: rgb(15, 20, 25);
+      --color-foreground: rgb(197, 197, 197);
+      --color-inactive-option-hover: rgb(37, 40, 50);
+      --color-button-foreground: rgb(200, 201, 219);
+      --color-button-background: rgb(20, 25, 31);
+      --color-button-border: rgb(66, 76, 87);
+      --color-button-hover: rgb(255, 180, 84);
+      --color-link: rgb(0, 150, 207);
+      --color-input-background: rgb(37, 40, 50);
+      --color-output-background: rgb(25, 31, 38);
+    }
+}
+
+body[data-theme="light"] {
+  --color-background: rgb(225, 225, 219);
+  --color-foreground: rgb(38, 38, 37);
+  --color-inactive-option-hover: rgb(194, 194, 188);
+  --color-button-foreground: rgb(200, 201, 219);
+  --color-button-background: rgb(59, 46, 42);
+  --color-button-border: rgb(59, 46, 42);
+  --color-button-hover: rgb(230, 159, 103);
+  --color-link: rgb(43, 121, 162);
+  --color-input-background: rgb(241, 241, 241);
+  --color-output-background: rgb(194, 194, 188);
+  --color-output-border: var(--color-button-border);
+}
+
+body[data-theme="dark"] {
+  --color-background: rgb(15, 20, 25);
+  --color-foreground: rgb(197, 197, 197);
+  --color-inactive-option-hover: rgb(37, 40, 50);
+  --color-button-foreground: rgb(200, 201, 219);
+  --color-button-background: rgb(20, 25, 31);
+  --color-button-border: rgb(66, 76, 87);
+  --color-button-hover: rgb(255, 180, 84);
+  --color-link: rgb(0, 150, 207);
+  --color-input-background: rgb(37, 40, 50);
+  --color-output-background: rgb(25, 31, 38);
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+body {
   height: 100%;
   width: 100%;
   margin: 0;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  color: var(--color-foreground);
+  background-color: var(--color-background);
 }
 
 #header, #main, #footer {
@@ -42,8 +109,18 @@ body {
   align-items: stretch;
 }
 
+#theme {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
 #input {
   font-family: monospace;
+  color: var(--color-foreground);
+  background-color: var(--color-input-background);
+  border: 1px solid var(--color-button-border);
+  margin: 5px 0;
 }
 
 #main, #input, #hex, #diag, #submit {
@@ -52,7 +129,8 @@ body {
 }
 
 #hex, #diag {
-  border: 1px solid red;
+  background-color: var(--color-output-background);
+  border: 1px solid var(--color-output-border);
   border-radius: 5px;
   margin: 0;
   margin-bottom: 5px;
@@ -61,10 +139,10 @@ body {
 }
 
 #hex:before, #diag:before {
-  background: white;
   margin-top: -30px;
   text-decoration: underline;
-  color: pink;
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 #hex:before {
@@ -80,13 +158,13 @@ input[type='radio'] {
 }
 
 input[type='radio'] + label {
-  border: 1px solid gray;
+  border: 1px solid var(--color-button-border);
   padding: 3px;
   cursor: pointer;
 }
 
 input[type='radio'] + label:hover {
-  background-color: #4c8dc050;
+  background-color: var(--color-inactive-option-hover);
 }
 
 input[type='radio'] + label:first-of-type {
@@ -98,24 +176,28 @@ input[type='radio'] + label:last-of-type {
 }
 
 input[type='radio']:checked + label {
-  color: #fff;
-  background-color: #2c6da0;
+  color: var(--color-button-foreground);
+  background-color: var(--color-button-background);
+}
+
+input[type='radio']:checked + label:hover {
+  color: var(--color-button-hover);
 }
 
 button {
   padding: 5px 10px;
   margin: 0;
   display: inline;
-  background-color: #2c6da0;
-  border: none;
-  color: #fff;
+  border: 1px solid var(--color-button-border);
+  color: var(--color-button-foreground);
+  background-color: var(--color-button-background);
   cursor: pointer;
   font-weight: bold;
   border-radius: 5px;
 }
 
 button:hover {
-  background: #3c7db0;
+  color: var(--color-button-hover);
 }
 
 button:active {
@@ -155,43 +237,4 @@ button:active {
   left: 0px;
   padding: 0;
   filter: invert(40%);
-}
-
-.dark a {
-  filter: invert(100%);
-}
-
-.dark, .dark textarea {
-  color: white;
-  background-color: black;
-  border-color: gray;
-}
-
-.dark #hex, .dark #diag {
-  border-color: red;
-}
-
-.dark #hex:before, .dark #diag:before {
-  background: black;
-  color: green;
-}
-
-.dark input[type='radio'] + label {
-  border-color: lightgray;
-}
-
-.dark input[type='radio'] + label:hover {
-  background-color: #4c8dc050;
-}
-
-.dark input[type='radio']:checked + label {
-  background-color: #2c6da0;
-}
-
-.dark button {
-  background-color: #2c6da0;
-}
-
-.dark button:hover {
-  background: #3c7db0;
 }
