@@ -3,12 +3,43 @@ html {
 }
 
 body {
+  --color-background: white;
+  --color-foreground: black;
+  --color-title: pink;
+  --color-inactive-option-hover: #4c8dc050;
+  --color-button-foreground: white;
+  --color-button-background: #2c6da0;
+  --color-button-hover-background: #3c7db0;
+  --color-link: blue;
+  --color-border: gray;
+  --color-output-border: red;
+}
+
+body.dark {
+  --color-background: black;
+  --color-foreground: white;
+  --color-title: green;
+  --color-inactive-option-hover: #4c8dc050;
+  --color-button-foreground: white;
+  --color-button-background: #2c6da0;
+  --color-button-hover-background: #3c7db0;
+  --color-link: yellow;
+  --color-border: lightgray;
+}
+
+a {
+  color: var(--color-link);
+}
+
+body {
   height: 100%;
   width: 100%;
   margin: 0;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  color: var(--color-foreground);
+  background-color: var(--color-background);
 }
 
 #header, #main, #footer {
@@ -44,6 +75,8 @@ body {
 
 #input {
   font-family: monospace;
+  color: var(--color-foreground);
+  background-color: var(--color-background);
 }
 
 #main, #input, #hex, #diag, #submit {
@@ -52,7 +85,7 @@ body {
 }
 
 #hex, #diag {
-  border: 1px solid red;
+  border: 1px solid var(--color-output-border);
   border-radius: 5px;
   margin: 0;
   margin-bottom: 5px;
@@ -61,10 +94,9 @@ body {
 }
 
 #hex:before, #diag:before {
-  background: white;
   margin-top: -30px;
   text-decoration: underline;
-  color: pink;
+  color: var(--color-title);
 }
 
 #hex:before {
@@ -80,13 +112,13 @@ input[type='radio'] {
 }
 
 input[type='radio'] + label {
-  border: 1px solid gray;
+  border: 1px solid var(--color-border);
   padding: 3px;
   cursor: pointer;
 }
 
 input[type='radio'] + label:hover {
-  background-color: #4c8dc050;
+  background-color: var(--color-inactive-option-hover);
 }
 
 input[type='radio'] + label:first-of-type {
@@ -98,24 +130,24 @@ input[type='radio'] + label:last-of-type {
 }
 
 input[type='radio']:checked + label {
-  color: #fff;
-  background-color: #2c6da0;
+  color: var(--color-button-foreground);
+  background-color: var(--color-button-background);
 }
 
 button {
   padding: 5px 10px;
   margin: 0;
   display: inline;
-  background-color: #2c6da0;
   border: none;
-  color: #fff;
+  color: var(--color-button-foreground);
+  background-color: var(--color-button-background);
   cursor: pointer;
   font-weight: bold;
   border-radius: 5px;
 }
 
 button:hover {
-  background: #3c7db0;
+  background: var(--color-button-hover-background);
 }
 
 button:active {
@@ -155,43 +187,4 @@ button:active {
   left: 0px;
   padding: 0;
   filter: invert(40%);
-}
-
-.dark a {
-  filter: invert(100%);
-}
-
-.dark, .dark textarea {
-  color: white;
-  background-color: black;
-  border-color: gray;
-}
-
-.dark #hex, .dark #diag {
-  border-color: red;
-}
-
-.dark #hex:before, .dark #diag:before {
-  background: black;
-  color: green;
-}
-
-.dark input[type='radio'] + label {
-  border-color: lightgray;
-}
-
-.dark input[type='radio'] + label:hover {
-  background-color: #4c8dc050;
-}
-
-.dark input[type='radio']:checked + label {
-  background-color: #2c6da0;
-}
-
-.dark button {
-  background-color: #2c6da0;
-}
-
-.dark button:hover {
-  background: #3c7db0;
 }
