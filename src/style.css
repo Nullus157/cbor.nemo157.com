@@ -16,7 +16,36 @@ body {
   --color-output-border: var(--color-button-border);
 }
 
-body.dark {
+@media (prefers-color-scheme: dark) {
+    body {
+      --color-background: rgb(15, 20, 25);
+      --color-foreground: rgb(197, 197, 197);
+      --color-inactive-option-hover: rgb(37, 40, 50);
+      --color-button-foreground: rgb(200, 201, 219);
+      --color-button-background: rgb(20, 25, 31);
+      --color-button-border: rgb(66, 76, 87);
+      --color-button-hover: rgb(255, 180, 84);
+      --color-link: rgb(0, 150, 207);
+      --color-input-background: rgb(37, 40, 50);
+      --color-output-background: rgb(25, 31, 38);
+    }
+}
+
+body[data-theme="light"] {
+  --color-background: rgb(225, 225, 219);
+  --color-foreground: rgb(38, 38, 37);
+  --color-inactive-option-hover: rgb(194, 194, 188);
+  --color-button-foreground: rgb(200, 201, 219);
+  --color-button-background: rgb(59, 46, 42);
+  --color-button-border: rgb(59, 46, 42);
+  --color-button-hover: rgb(230, 159, 103);
+  --color-link: rgb(43, 121, 162);
+  --color-input-background: rgb(241, 241, 241);
+  --color-output-background: rgb(194, 194, 188);
+  --color-output-border: var(--color-button-border);
+}
+
+body[data-theme="dark"] {
   --color-background: rgb(15, 20, 25);
   --color-foreground: rgb(197, 197, 197);
   --color-inactive-option-hover: rgb(37, 40, 50);
@@ -75,6 +104,12 @@ body {
 }
 
 #parse {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+#theme {
   display: flex;
   flex-direction: row;
   align-items: stretch;

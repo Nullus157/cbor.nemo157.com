@@ -6,7 +6,6 @@ const submit = document.getElementById('submit')
 const hex = document.getElementById('hex')
 const diag = document.getElementById('diag')
 const save = document.getElementById('save')
-const dark = document.getElementById('dark')
 const saved = <HTMLAnchorElement>document.getElementById('saved')
 const copyButton = <HTMLButtonElement>document.getElementById('copy-button')
 const copied = document.getElementById('copied')
@@ -18,18 +17,33 @@ function store(setting: string, value: any) {
   }
 }
 
-function load(setting: string) {
+function load<T>(setting: string): T {
   try {
     return JSON.parse(window.localStorage.getItem(setting))
   } catch {
   }
 }
 
-dark.addEventListener('click', () => {
-  store('dark', document.body.classList.toggle('dark'))
-})
+try {
+  const dark = window.localStorage.getItem('dark')
+  if (dark) {
+    store('theme', JSON.parse(dark) ? 'dark' : 'light')
+    window.localStorage.removeItem('dark')
+  }
+} catch {
+}
 
-document.body.classList.toggle('dark', load('dark') || false)
+const theme = load<string>('theme') || 'auto';
+
+(<HTMLInputElement>document.querySelector(`input[name="theme"][value="${theme}"]`)).checked = true
+document.body.dataset.theme = theme
+
+for (const el of document.querySelectorAll<HTMLInputElement>('input[name="theme"]')) {
+  el.addEventListener('click', () => {
+    store('theme', el.value)
+    document.body.dataset.theme = el.value
+  })
+}
 
 cbor.then(cbor => {
   function parse(type: string, value: string) {
