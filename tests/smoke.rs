@@ -55,12 +55,6 @@ fn defaults() {
 
     assert_eq!(
         tab.find_element("#diag").compat()?.text_content()?,
-        indoc!(
-            r#"
-                {_
-                    "Fun": true,
-                    "Amt": -2,
-                }"#
-        )
+        r#"{_ "Fun": true, "Amt": -2}"#
     );
 }
