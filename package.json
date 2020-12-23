@@ -1,17 +1,19 @@
 {
   "license": "MIT OR Apache-2.0",
   "scripts": {
-    "start": "webpack-dev-server --mode development",
-    "build": "webpack --mode development"
+    "start": "webpack serve --mode development",
+    "build": "webpack"
   },
   "devDependencies": {
+    "@wasm-tool/wasm-pack-plugin": "1.3.1",
     "copy-webpack-plugin": "5.1.1",
-    "html-webpack-tags-plugin": "2.0.17",
     "html-webpack-inline-source-plugin": "0.0.10",
     "html-webpack-plugin": "3.2.0",
+    "html-webpack-tags-plugin": "2.0.17",
     "style-ext-html-webpack-plugin": "4.1.3",
     "ts-loader": "8.0.12",
     "typescript": "4.1.3",
+    "wasm-pack": "^0.9.1",
     "webpack": "4.44.2",
     "webpack-cli": "4.2.0",
     "webpack-dev-server": "3.11.0"
