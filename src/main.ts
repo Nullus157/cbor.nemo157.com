@@ -1,4 +1,4 @@
-const cbor = import("../build/cbor_nemo157_com")
+const cbor = import("../build")
 import copy from 'copy-to-clipboard'
 
 const input = <HTMLTextAreaElement>document.getElementById('input')

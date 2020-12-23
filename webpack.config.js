@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+const WasmPackPlugin = require('@wasm-tool/wasm-pack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -12,6 +13,10 @@ module.exports = {
     filename: 'main.js',
   },
   plugins: [
+    new WasmPackPlugin({
+      crateDirectory: __dirname,
+      outDir: 'build',
+    }),
     new CopyWebpackPlugin(['style.css'], { context: 'src', copyUnmodified: true }),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
