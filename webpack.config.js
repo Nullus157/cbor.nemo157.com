@@ -3,6 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const WasmPackPlugin = require('@wasm-tool/wasm-pack-plugin');
+const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -24,6 +25,7 @@ module.exports = {
     }),
     new HtmlWebpackTagsPlugin({ tags: ['style.css'], append: true }),
     new HtmlWebpackInlineSourcePlugin(),
+    new PreloadWebpackPlugin(),
   ],
   module: {
     rules: [
