@@ -106,7 +106,7 @@ cbor.then(cbor => {
     copyButton.style.display = 'inline-block'
   })
 
-  let copyTimeout = setTimeout(() => {}, 0)
+  let copyTimeout: ReturnType<typeof setTimeout>;
   copyButton.addEventListener('click', () => {
     if (copy(saved.href, { format: 'text/plain' })) {
       copied.style.display = 'inline-block'

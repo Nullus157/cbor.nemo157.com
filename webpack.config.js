@@ -11,6 +11,7 @@ module.exports = {
   entry: './src/main.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '',
     filename: 'main.js',
   },
   plugins: [
@@ -18,18 +19,24 @@ module.exports = {
       crateDirectory: __dirname,
       outDir: 'build',
     }),
-    new CopyWebpackPlugin(['style.css'], { context: 'src', copyUnmodified: true }),
+    new CopyWebpackPlugin({
+      patterns: ['src/style.css'],
+    }),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       inlineSource: '.(js|css)$',
+      inject: 'body',
     }),
     new HtmlWebpackTagsPlugin({ tags: ['style.css'], append: true }),
-    new HtmlWebpackInlineSourcePlugin(),
+    new HtmlWebpackInlineSourcePlugin(HtmlWebpackPlugin),
     new PreloadWebpackPlugin(),
   ],
   module: {
     rules: [
       { test: /\.ts$/, use: 'ts-loader', exclude: /node_modules/ },
     ],
+  },
+  experiments: {
+    syncWebAssembly: true,
   },
 };
