@@ -146,7 +146,7 @@ body {
 }
 
 #hex:before {
-  content: 'Annotated Hex\A\A';
+  content: 'Annotated Hex (' attr(data-bytes) ' bytes) \A\A' ;
 }
 
 #diag:before {
