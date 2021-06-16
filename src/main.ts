@@ -69,6 +69,7 @@ cbor.then(cbor => {
 
     hex.textContent = result.Ok[0]
     diag.textContent = result.Ok[1]
+    hex.dataset.bytes = result.Ok[2]
   }
 
   const process = () => {
