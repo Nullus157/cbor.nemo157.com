@@ -2,6 +2,7 @@ use wasm_bindgen::{prelude::wasm_bindgen, JsError as Error, JsValue};
 
 #[derive(serde::Serialize)]
 struct Response {
+    annotated_hex: String,
     hex: String,
     diag: String,
     bytes_length: usize,
@@ -10,7 +11,8 @@ struct Response {
 impl From<cbor_diag::DataItem> for Response {
     fn from(item: cbor_diag::DataItem) -> Response {
         Response {
-            hex: item.to_hex(),
+            annotated_hex: item.to_hex(),
+            hex: hex::encode(item.to_bytes()),
             diag: item.to_diag_pretty(),
             bytes_length: item.to_bytes().len(),
         }

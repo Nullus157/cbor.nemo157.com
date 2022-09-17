@@ -128,7 +128,7 @@ body {
   min-height: 0;
 }
 
-#hex, #diag {
+pre {
   background-color: var(--color-output-background);
   border: 1px solid var(--color-output-border);
   border-radius: 5px;
@@ -145,12 +145,21 @@ body {
   font-size: 1.2em;
 }
 
-#hex:before {
-  content: 'Annotated Hex (' attr(data-bytes) ' bytes) \A\A' ;
+#annotate ~ #hex:before {
+  content: 'Hex (' attr(data-bytes) ' bytes)\A\A';
+}
+
+#annotate:checked ~ #hex:before {
+  content: 'Annotated Hex (' attr(data-bytes) ' bytes)\A\A';
 }
 
 #diag:before {
   content: 'Diagnostic Notation\A\A';
+}
+
+#annotate + label {
+  display: block;
+  float: right;
 }
 
 input[type='radio'] {
@@ -182,6 +191,36 @@ input[type='radio']:checked + label {
 
 input[type='radio']:checked + label:hover {
   color: var(--color-button-hover);
+}
+
+input[type=checkbox] {
+  display: none;
+}
+
+input[type=checkbox] + label {
+  border: 1px solid var(--color-button-border);
+  padding: 3px;
+  cursor: pointer;
+}
+
+input[type=checkbox] + label:hover {
+  background-color: var(--color-inactive-option-hover);
+}
+
+input[type=checkbox]:checked + label {
+  color: var(--color-button-foreground);
+  background-color: var(--color-button-background);
+}
+
+input[type=checkbox] + label:before {
+  display: inline-block;
+  content: "☐";
+  width: 1em;
+  padding: 0px 3px;
+}
+
+input[type=checkbox]:checked + label:before {
+  content: "☑";
 }
 
 button {
