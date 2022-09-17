@@ -28,9 +28,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: hecrj/setup-rust-action@v1
-    - uses: actions/download-artifact@v1
+    - uses: actions/download-artifact@v3
       with:
         name: dist
+        path: dist
     - run: sudo apt-get update && sudo apt-get install chromium-browser
     - run: |
         curl -LO https://github.com/svenstaro/miniserve/releases/download/v0.6.0/miniserve-linux-x86_64
@@ -46,9 +47,10 @@ jobs:
     if: github.ref == 'refs/heads/master'
     needs: build
     steps:
-    - uses: actions/download-artifact@v1
+    - uses: actions/download-artifact@v3
       with:
         name: dist
+        path: dist
     - uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
