@@ -9,6 +9,7 @@ const save = document.getElementById('save')
 const saved = <HTMLAnchorElement>document.getElementById('saved')
 const copyButton = <HTMLButtonElement>document.getElementById('copy-button')
 const copied = document.getElementById('copied')
+const annotate = <HTMLInputElement>document.getElementById('annotate')
 
 function store(setting: string, value: any) {
   try {
@@ -38,6 +39,8 @@ const theme = load<string>('theme') || 'auto';
 (<HTMLInputElement>document.querySelector(`input[name="theme"][value="${theme}"]`)).checked = true
 document.body.dataset.theme = theme
 
+annotate.checked = load('annotate') == null ? true : load('annotate')
+
 for (const el of document.querySelectorAll<HTMLInputElement>('input[name="theme"]')) {
   el.addEventListener('click', () => {
     store('theme', el.value)
@@ -65,15 +68,20 @@ cbor.then(cbor => {
 
     result = JSON.parse(result)
 
-    hex.textContent = result.hex
-    diag.textContent = result.diag
+    if (annotate.checked) {
+      hex.textContent = result.annotated_hex
+    } else {
+      hex.textContent = result.hex
+    }
     hex.dataset.bytes = result.bytes_length
+    diag.textContent = result.diag
   }
 
   const process = () => {
     const type = (<HTMLInputElement>document.querySelector('input[name="type"]:checked')).value;
     store('type', type)
     store('value', input.value)
+    store('annotate', annotate.checked)
     try {
       parse(type, input.value)
     } catch (err) {
@@ -94,6 +102,7 @@ cbor.then(cbor => {
   }
 
   submit.addEventListener('click', process)
+  annotate.addEventListener('click', process)
 
   save.addEventListener('click', () => {
     const type = (<HTMLInputElement>document.querySelector('input[name="type"]:checked')).value
