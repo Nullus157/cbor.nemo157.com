@@ -28,7 +28,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: hecrj/setup-rust-action@v1
-    - uses: actions/download-artifact@v1
+    - uses: actions/download-artifact@v3
       with:
         name: dist
     - run: sudo apt-get update && sudo apt-get install chromium-browser
@@ -46,7 +46,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     needs: build
     steps:
-    - uses: actions/download-artifact@v1
+    - uses: actions/download-artifact@v3
       with:
         name: dist
     - uses: peaceiris/actions-gh-pages@v3
