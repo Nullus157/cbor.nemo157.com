@@ -63,13 +63,11 @@ cbor.then(cbor => {
         break;
     }
 
-    if (result.Err) {
-      throw result.Err
-    }
+    result = JSON.parse(result)
 
-    hex.textContent = result.Ok[0]
-    diag.textContent = result.Ok[1]
-    hex.dataset.bytes = result.Ok[2]
+    hex.textContent = result.hex
+    diag.textContent = result.diag
+    hex.dataset.bytes = result.bytes_length
   }
 
   const process = () => {
@@ -151,7 +149,7 @@ cbor.then(cbor => {
   if (type && value) {
     (<HTMLInputElement>document.querySelector(`input[name="type"][value="${type}"]`)).checked = true;
     input.value = value;
-    parse(type, value);
+    process();
   }
 
 }, err => hex.textContent = err)
