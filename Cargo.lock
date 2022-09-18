@@ -118,9 +118,9 @@ checksum = "14c189c53d098945499cdfa7ecc63567cf3886b3332b312a5b4585d8d3a6a610"
 
 [[package]]
 name = "cbor-diag"
-version = "0.1.10"
+version = "0.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c66270975475829c6772b36e58df5352727cca4749dd9d6b826d09b2459a0ddd"
+checksum = "2644c5bb01d8328b218301180b84ccc6f7fce031d50e30917b07ae762a185b7b"
 dependencies = [
  "bs58",
  "chrono",
