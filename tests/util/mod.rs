@@ -1,5 +1,4 @@
 use anyhow::anyhow;
-use failure::ResultExt;
 use libc::atexit;
 use once_cell::sync::Lazy;
 use serde_json::value::Value;
@@ -55,8 +54,7 @@ pub trait ElementExt {
 impl ElementExt for headless_chrome::browser::tab::element::Element<'_> {
     #[fehler::throws(anyhow::Error)]
     fn text_content(&self) -> String {
-        self.call_js_fn("function() { return this.textContent; }", false)
-            .compat()?
+        self.call_js_fn("function() { return this.textContent; }", vec![], false)?
             .value
             .and_then(|v| {
                 if let Value::String(s) = v {
@@ -70,8 +68,7 @@ impl ElementExt for headless_chrome::browser::tab::element::Element<'_> {
 
     #[fehler::throws(anyhow::Error)]
     fn value(&self) -> String {
-        self.call_js_fn("function() { return this.value; }", false)
-            .compat()?
+        self.call_js_fn("function() { return this.value; }", vec![], false)?
             .value
             .and_then(|v| {
                 if let Value::String(s) = v {
