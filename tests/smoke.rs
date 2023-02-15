@@ -1,4 +1,3 @@
-use failure::ResultExt;
 use headless_chrome::Browser;
 use indoc::indoc;
 
@@ -12,13 +11,13 @@ fn smoke() {
     let _ = pretty_env_logger::try_init();
     let base = &util::SERVER.url;
 
-    let browser = Browser::default().compat()?;
-    let tab = browser.wait_for_initial_tab().compat()?;
-    tab.navigate_to(base).compat()?;
-    tab.wait_until_navigated().compat()?;
+    let browser = Browser::default()?;
+    let tab = browser.new_tab()?;
+    tab.navigate_to(base)?;
+    tab.wait_until_navigated()?;
 
     assert_eq!(
-        tab.find_element("#header span").compat()?.text_content()?,
+        tab.find_element("#header span")?.text_content()?,
         "Inspired by cbor.me"
     );
 }
@@ -29,16 +28,16 @@ fn defaults() {
     let _ = pretty_env_logger::try_init();
     let base = &util::SERVER.url;
 
-    let browser = Browser::default().compat()?;
-    let tab = browser.wait_for_initial_tab().compat()?;
-    tab.navigate_to(base).compat()?;
-    tab.wait_until_navigated().compat()?;
+    let browser = Browser::default()?;
+    let tab = browser.new_tab()?;
+    tab.navigate_to(base)?;
+    tab.wait_until_navigated()?;
 
-    let input = tab.find_element("#input").compat()?.value()?;
+    let input = tab.find_element("#input")?.value()?;
     assert_eq!(input, "bf6346756ef563416d7421ff");
 
     assert_eq!(
-        tab.find_element("#hex").compat()?.text_content()?,
+        tab.find_element("#hex")?.text_content()?,
         indoc!(
             r#"
                 bf           # map(*)
@@ -54,7 +53,7 @@ fn defaults() {
     );
 
     assert_eq!(
-        tab.find_element("#diag").compat()?.text_content()?,
+        tab.find_element("#diag")?.text_content()?,
         r#"{_ "Fun": true, "Amt": -2}"#
     );
 }
