@@ -22,11 +22,11 @@ extern "C" fn stop_server() {
 fn start_server() -> anyhow::Result<Server> {
     let port = port_check::free_local_port().ok_or_else(|| anyhow!("Failed to find free port"))?;
     let path = std::env::current_dir()?.join("dist");
-    let url = format!("http://127.0.0.1:{}", port);
+    let url = format!("http://127.0.0.1:{port}");
 
     let handle = std::process::Command::new("miniserve")
         .arg("-i=127.0.0.1")
-        .arg(&format!("-p={}", port))
+        .arg(&format!("-p={port}"))
         .arg("--index=index.html")
         .arg(path)
         .stdout(std::process::Stdio::null())
