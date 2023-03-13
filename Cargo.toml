@@ -11,7 +11,7 @@ crate-type = ["cdylib"]
 [dependencies]
 cbor-diag = "0.1.11"
 serde = { version = "1.0.155", features = ["derive"] }
-futures = "0.3.26"
+futures = "0.3.27"
 serde_json = "1.0.93"
 fehler = "1.0.0"
 hex = { version = "0.4.3", default-features = false, features = ["alloc"] }
