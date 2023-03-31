@@ -39,6 +39,6 @@ jobs:
 
 on:
   merge_group:
-    types: [check_requested]
+    types: [checks_requested]
   pull_request:
     branches: [master]
