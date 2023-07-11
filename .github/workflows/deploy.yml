@@ -10,7 +10,7 @@ jobs:
       with:
         name: dist
         path: _site
-    - uses: actions/upload-pages-artifact@v1
+    - uses: actions/upload-pages-artifact@v2
 
   deploy:
     environment:
