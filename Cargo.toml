@@ -10,11 +10,14 @@ crate-type = ["cdylib"]
 
 [dependencies]
 cbor-diag = "0.1.12"
-serde = { version = "1.0.183", features = ["derive"] }
+serde = { version = "1.0.171", features = ["derive"] }
 futures = "0.3.28"
 serde_json = "1.0.105"
 fehler = "1.0.0"
 hex = { version = "0.4.3", default-features = false, features = ["alloc"] }
+
+# avoid precompiled binaries https://github.com/serde-rs/serde/issues/2538
+serde_derive = { version = "1.0, <1.0.172", default-features = false }
 
 [dependencies.wasm-bindgen]
 version = "0.2.87"
