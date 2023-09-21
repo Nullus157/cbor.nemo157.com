@@ -107,8 +107,7 @@ cbor.then(cbor => {
   save.addEventListener('click', () => {
     const type = (<HTMLInputElement>document.querySelector('input[name="type"]:checked')).value
     let url = new URL(document.location.toString())
-    url.searchParams.set("type", type)
-    url.searchParams.set("value", input.value)
+    url.hash = '#' + new URLSearchParams({ type, value: input.value }).toString()
     saved.href = url.toString()
     saved.text = 'Permalink to the playground'
     copyButton.style.display = 'inline-block'
@@ -141,9 +140,10 @@ cbor.then(cbor => {
     tryProcess()
   })
 
-  let url = new URL(document.location.toString());
-  let type = url.searchParams.get("type");
-  let value = url.searchParams.get("value");
+  let url = new URL(document.location.toString())
+  let hashParams = url.hash ? new URLSearchParams(url.hash.slice(1)) : null
+  let type = hashParams ? hashParams.get("type") : url.searchParams.get("type")
+  let value = hashParams ? hashParams.get("value") : url.searchParams.get("value")
 
   if (!type || !value) {
     type = load('type')
