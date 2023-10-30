@@ -25,9 +25,9 @@ checksum = "a4668cab20f66d8d020e1fbc0ebe47217433c1b6c8f2040faf858554e394ace6"
 
 [[package]]
 name = "auto_generate_cdp"
-version = "0.4.3"
+version = "0.4.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ae272477dc138edb8572a7f9c330effd798bff92f8b80a86a6ec9e771cf13d4c"
+checksum = "7af08ed49930c50104b2f1699d257e5053fb1809e370647bde9c58b31d65d417"
 dependencies = [
  "convert_case",
  "proc-macro2",
@@ -496,9 +496,9 @@ dependencies = [
 
 [[package]]
 name = "headless_chrome"
-version = "1.0.6"
+version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c30aa2b885d5c40a00e361fe68e88df1423b68700c2db23d8ead1902fcc341ff"
+checksum = "510feb44247f8b19964c8359f5f746fe202e88dfaeab1ac53632ad71b6dec60b"
 dependencies = [
  "anyhow",
  "auto_generate_cdp",
