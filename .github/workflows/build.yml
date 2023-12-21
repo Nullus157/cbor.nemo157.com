@@ -10,7 +10,7 @@ jobs:
         targets: wasm32-unknown-unknown
     - run: npm ci
     - run: npm run build
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: dist
         path: dist
