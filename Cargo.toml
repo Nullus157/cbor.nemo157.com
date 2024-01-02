@@ -24,7 +24,7 @@ version = "0.2.89"
 features = ["serde-serialize"]
 
 [dev-dependencies]
-anyhow = "1.0.78"
+anyhow = "1.0.79"
 port_check = "0.1.5"
 once_cell = "1.19.0"
 libc = "0.2.151"
