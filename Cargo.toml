@@ -20,7 +20,7 @@ hex = { version = "0.4.3", default-features = false, features = ["alloc"] }
 serde_derive = { version = "1.0, <1.0.172", default-features = false }
 
 [dependencies.wasm-bindgen]
-version = "0.2.91"
+version = "0.2.92"
 features = ["serde-serialize"]
 
 [dev-dependencies]
