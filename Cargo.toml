@@ -26,7 +26,7 @@ features = ["serde-serialize"]
 [dev-dependencies]
 anyhow = "1.0.102"
 port_check = "0.3.0"
-once_cell = "1.21.3"
+once_cell = "1.21.4"
 libc = "0.2.183"
 indoc = "2.0.7"
 headless_chrome = "1.0.18"
