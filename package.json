@@ -13,7 +13,7 @@
     "preload-webpack-plugin": "^3.0.0-beta.4",
     "style-ext-html-webpack-plugin": "^4.1.3",
     "ts-loader": "^9.5.4",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.2",
     "wasm-pack": "^0.14.0",
     "webpack": "^5.105.4",
     "webpack-cli": "^7.0.2",
