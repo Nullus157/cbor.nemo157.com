@@ -20,6 +20,6 @@
     "webpack-dev-server": "^5.2.3"
   },
   "dependencies": {
-    "copy-to-clipboard": "4.0.0"
+    "copy-to-clipboard": "4.0.2"
   }
 }
