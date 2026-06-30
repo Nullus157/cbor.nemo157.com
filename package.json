@@ -16,7 +16,7 @@
     "typescript": "^5.9.3",
     "wasm-pack": "^0.15.0",
     "webpack": "^5.108.3",
-    "webpack-cli": "^7.0.3",
+    "webpack-cli": "^7.1.0",
     "webpack-dev-server": "^5.2.5"
   },
   "dependencies": {
