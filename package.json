@@ -17,7 +17,7 @@
     "wasm-pack": "^0.15.0",
     "webpack": "^5.110.3",
     "webpack-cli": "^7.2.3",
-    "webpack-dev-server": "^6.0.0"
+    "webpack-dev-server": "^6.1.0"
   },
   "dependencies": {
     "copy-to-clipboard": "4.0.2"
